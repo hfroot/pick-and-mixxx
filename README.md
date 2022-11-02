@@ -1,9 +1,18 @@
 # Arduino MIDI
 
+Goals (in order of feasibility):
+- an arduino midi deck that can be mapped to mixxx software
+- a midi deck with an integrated raspberry pi, making the set more portable
+- battery-powered integrated mixing deck
+- nicely organised library so that anyone can mix and match the arduino code to fit their hardware set up
+- nicely documented, tutorialised repo
+
+## What I'm working with
+
 - Linux Fedora
 - Arduino software
-- Arduino MKR 1010
-- Mixxx
+- Arduino MKR 1010 (chosen for no particular reason other than that was the one I had lying around)
+- Mixxx (chosen because I was already using this particular software)
 
 ## Hooking up a button
 
