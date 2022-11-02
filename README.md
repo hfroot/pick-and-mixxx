@@ -1,8 +1,9 @@
 # Arduino MIDI
 
-Goals (in order of feasibility):
+Goals (in order of feasibility/priority):
 - an arduino midi deck that can be mapped to mixxx software
 - a midi deck with an integrated raspberry pi, making the set more portable
+- a pretty case to hold it all together, ideally wooden
 - battery-powered integrated mixing deck
 - nicely organised library so that anyone can mix and match the arduino code to fit their hardware set up
 - nicely documented, tutorialised repo
