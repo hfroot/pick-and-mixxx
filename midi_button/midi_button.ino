@@ -7,7 +7,7 @@ MIDI_CREATE_INSTANCE(HardwareSerial, Serial, midiOut);
 void setup() {
   pinMode(9, INPUT_PULLUP);
 
-  Serial.begin(115200); 
+  Serial.begin(115200);
 }
 
 void loop() {
