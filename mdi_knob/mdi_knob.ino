@@ -12,17 +12,6 @@ const int MIDI_MAX = 128;
 const double MIDI_CONVERSION = (double)MIDI_MAX / READ_MAX;
 const int LED_MAX = 256;
 const int LED_CONVERSION = READ_MAX / LED_MAX;
-Button button1(22); // Connect your button between pin 2 and GND
-
-
-void setup() {
-  button1.begin();
-
-  while (!Serial) { }; // for Leos
-
-  Serial.begin(115200); // midi
-//  Serial.begin(9600); // terminal
-}
 
 // the the channel for the corresponding pin in at the same idx
 int analogs[] = {A2, A0};
@@ -30,9 +19,22 @@ int analogChannels[] = {57, 56};
 int previousAnalogVals[] = {READ_MAX, READ_MAX}; // this value is greater than anything analogRead will return
 int analogCount = 2;
 
-int buttonPins[] = {22};
-int btnChannels[] = {60};
-int buttonCount = 1;
+//int buttonPins[] = {22};
+Button button1(24); // Connect your button between pin 22 and GND
+Button button2(22);
+Button buttons[] = {button2, button1};
+int btnChannels[] = {61, 60};
+int buttonCount = 2;
+
+void setup() {
+  button1.begin();
+  button2.begin();
+
+  while (!Serial) { }; // for Leos
+
+  Serial.begin(115200); // midi
+//  Serial.begin(9600); // terminal
+}
 
 void loop() {
   for(int idx = 0; idx < analogCount; idx++) {
@@ -66,9 +68,9 @@ void pot(int idx) {
 int resetFlag = 0;
 
 void button(int idx) {
-  if (button1.pressed()) {
-     midiOut.sendControlChange(56, 127, 1);
-  } else if (button1.released()) {
-     midiOut.sendControlChange(56, 0, 1);
+  if (buttons[idx].pressed()) {
+     midiOut.sendControlChange(btnChannels[idx], 127, 1);
+  } else if (buttons[idx].released()) {
+     midiOut.sendControlChange(btnChannels[idx], 0, 1);
   }
 }
