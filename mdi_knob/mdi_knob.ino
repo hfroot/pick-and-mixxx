@@ -1,4 +1,5 @@
 #include <MIDI.h>
+#include <Button.h>
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial, midiOut);
 
@@ -11,27 +12,39 @@ const int MIDI_MAX = 128;
 const double MIDI_CONVERSION = (double)MIDI_MAX / READ_MAX;
 const int LED_MAX = 256;
 const int LED_CONVERSION = READ_MAX / LED_MAX;
+Button button1(22); // Connect your button between pin 2 and GND
 
 
 void setup() {
+  button1.begin();
+
+  while (!Serial) { }; // for Leos
+
   Serial.begin(115200); // midi
 //  Serial.begin(9600); // terminal
 }
 
 // the the channel for the corresponding pin in at the same idx
-int pins[] = {A2, A0};
-int channels[] = {57, 56};
-int previousVals[] = {READ_MAX, READ_MAX}; // this value is greater than anything analogRead will return
-int pinCount = 2;
+int analogs[] = {A2, A0};
+int analogChannels[] = {57, 56};
+int previousAnalogVals[] = {READ_MAX, READ_MAX}; // this value is greater than anything analogRead will return
+int analogCount = 2;
+
+int buttonPins[] = {22};
+int btnChannels[] = {60};
+int buttonCount = 1;
 
 void loop() {
-  for(int idx = 0; idx < pinCount; idx++) {
+  for(int idx = 0; idx < analogCount; idx++) {
     pot(idx);
+  }
+  for(int idx = 0; idx < buttonCount; idx++) {
+    button(idx);
   }
 }
 
 void pot(int idx) {
-  int potPin = pins[idx];
+  int potPin = analogs[idx];
   float potVal = analogRead(potPin);
   
   int midiVal = potVal - POT_READ_MIN; // get rid of final volts
@@ -40,13 +53,22 @@ void pot(int idx) {
   if (midiVal < 0) { midiVal = 0; }
   else if (midiVal >= MIDI_MAX) { midiVal = MIDI_MAX - 1; }
 
-  if(previousVals[idx] == READ_MAX) {
-    previousVals[idx] = midiVal; // get initial state
+  if(previousAnalogVals[idx] == READ_MAX) {
+    previousAnalogVals[idx] = midiVal; // get initial state
   }
 
-  if(midiVal > previousVals[idx] || midiVal < previousVals[idx]) {
-    midiOut.sendControlChange(channels[idx], midiVal, 1);
-    previousVals[idx] = midiVal;
+  if(midiVal > previousAnalogVals[idx] || midiVal < previousAnalogVals[idx]) {
+    midiOut.sendControlChange(analogChannels[idx], midiVal, 1);
+    previousAnalogVals[idx] = midiVal;
     delay(10);
+  }
+}
+int resetFlag = 0;
+
+void button(int idx) {
+  if (button1.pressed()) {
+     midiOut.sendControlChange(56, 127, 1);
+  } else if (button1.released()) {
+     midiOut.sendControlChange(56, 0, 1);
   }
 }
