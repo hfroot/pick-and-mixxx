@@ -14,10 +14,10 @@ const int LED_MAX = 256;
 const int LED_CONVERSION = READ_MAX / LED_MAX;
 
 // the the channel for the corresponding pin in at the same idx
-int analogs[] = {A2, A0};
-int analogChannels[] = {57, 56};
-int previousAnalogVals[] = {READ_MAX, READ_MAX}; // this value is greater than anything analogRead will return
-int analogCount = 2;
+int analogs[] = {A2, A0, A1};
+int analogChannels[] = {57, 56, 55};
+int previousAnalogVals[] = {READ_MAX, READ_MAX, READ_MAX}; // this value is greater than anything analogRead will return
+int analogCount = 3;
 
 //int buttonPins[] = {22};
 Button button1(24); // Connect your button between pin 22 and GND
