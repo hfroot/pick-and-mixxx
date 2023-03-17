@@ -15,6 +15,10 @@ Goals (in order of feasibility/priority):
 - Arduino MKR 1010 (chosen for no particular reason other than that was the one I had lying around)
 - Mixxx (chosen because I was already using this particular software)
 
+## Photos
+
+https://drive.google.com/drive/folders/1-30mevmbbR7FQFWHTCHeHI3Pf1oLUQ9v?usp=share_link
+
 ## Hooking up a button
 
 Example code
@@ -31,7 +35,12 @@ then I ran in the terminal
 
 With that command running, open Mixxx > Options > Preferences > Controllers. Should see a controller there.
 
-When re-uploading code to the arduino, kill the ttymidi command before. Otherwise I found that the location /dev/ttyACM0 would change. It's not the end of the world if it does. Either re run the ttymidi command with the new location, or re-upload once the command is killed and the location will be restored to the original one.
+When re-uploading code to the arduino, 
+
+- quit mixxx
+- kill the ttymidi command
+
+Otherwise I found that the location /dev/ttyACM0 would change and mixxx wouldn't be able to detect the device. It's not the end of the world if it does. Either re run the ttymidi command with the new location, or re-upload once the command is killed and the location will be restored to the original one.
 
 Using the mixxx learning wizard, I mapped the button press to a headphone button. AND IT WORKED. Press 50 million times for extra satisfaction. Save the mapping without adding other controls. If after a reupload of code you lose the functionality, you might have to go back into the mixxx controller settings. You should find your new mapping in the Load mapping menu.
 
