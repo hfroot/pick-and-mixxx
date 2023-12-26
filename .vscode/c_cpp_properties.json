@@ -8,6 +8,7 @@
             "intelliSenseMode": "linux-gcc-x64",
             "includePath": [
                 "${workspaceFolder}/**",
+                "/home/helen/Develop/pick-and-mixxx/midi_log_pot",
                 "/home/helen/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
                 "/home/helen/.arduino15/packages/arduino/hardware/avr/1.8.6/variants/mega",
                 "/home/helen/Arduino/libraries/MIDI_Library/src",
