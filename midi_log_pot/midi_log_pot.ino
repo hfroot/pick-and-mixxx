@@ -9,6 +9,7 @@ const double MIDI_CONVERSION = (double)MIDI_MAX / ANALOG_READ_MAX;
 
 MidiSlidePot slidePot1(midiOut, A0, 55);
 MidiSlidePot slidePot2(midiOut, A1, 56);
+MidiSlidePot slidePot3(midiOut, A2, 57);
 
 void setup() {
   while (!Serial) { }; // for Leos
@@ -20,4 +21,5 @@ void setup() {
 void loop() {
   slidePot1.read();
   slidePot2.read();
+  slidePot3.read();
 }
