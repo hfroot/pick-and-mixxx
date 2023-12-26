@@ -19,7 +19,7 @@ void setup() {
 }
 
 void loop() {
-  slidePot1.read();
-  slidePot2.read();
-  slidePot3.read();
+  slidePot1.sendChange();
+  slidePot2.sendChange();
+  slidePot3.sendChange();
 }

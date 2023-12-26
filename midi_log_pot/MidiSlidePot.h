@@ -14,7 +14,7 @@ class MidiSlidePot
 {
 	public:
 		MidiSlidePot(midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<HardwareSerial> > midi_out, uint8_t pin, uint8_t midi_channel);
-		void read();
+		void sendChange();
 	
 	private:
 		midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<HardwareSerial> > _midi_out;

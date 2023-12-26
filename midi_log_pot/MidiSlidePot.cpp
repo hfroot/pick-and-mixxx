@@ -26,7 +26,7 @@ MidiSlidePot::MidiSlidePot(midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<Hardwa
 // public methods
 // 
 
-void MidiSlidePot::read()
+void MidiSlidePot::sendChange()
 {
 
   float potVal = analogRead(_pin);
