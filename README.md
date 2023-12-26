@@ -51,3 +51,22 @@ Probs took 3.5 hrs to get to this point.
 https://www.youtube.com/watch?v=U9olJK3RYXg&list=PL4_gPbvyebyH2xfPXePHtx8gK5zPBrVkg&index=8
 https://docs.arduino.cc/tutorials/generic/midi-device?_gl=1*18l1roo*_ga*MTIwMjY4Nzk2MS4xNjY3Mzg4MzMx*_ga_NEXN8H46L5*MTY2NzM4ODMzMS4xLjEuMTY2NzM5MjMwMC4wLjAuMA..
 https://manual.mixxx.org/2.3/en/chapters/advanced_topics.html#advanced-controller
+
+
+## VSCode
+
+As much as I love Arduino, their IDE makes me want to cry, especially now that I am used to the delights of VSCode.
+
+So let's switch to programming the Arduino through VSCode.
+
+- In VSCode, install the Arduino extension
+- Make sure C/C++ extension is installed too (for me it was already)
+    - Ctrl - shift - p now has lots of Arduino-related commands, all prefixed with `Arduino:`
+- If you have errors with your include commands: I had to copy all the paths into `includePath` in `.vscode/c_cpp_properties.json` from the `Arduino` configuration into my `Linux` configuration
+- I selected the same Serial port and Programmer that my Arduino IDE used (`/dev/ttyACMO` and `AVRISP mkll` respectively)
+- Added to the C properties JSON `"defines": ["USBCON"]` to fix the `Serial` error
+- I ignored the error VSCode highlights on `MIDI_CREATE_INSTANCE`
+- Verify
+- Upload
+- Run the midi terminal command
+- Open Mixxx
