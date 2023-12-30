@@ -12,16 +12,10 @@ MidiSlidePot::MidiSlidePot(midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<Hardwa
 ,  _pin(pin)
 ,  _midi_channel(midi_channel)
 ,  _midi_conversion((double)128/1024) // 128 = midi max; 1024 = analog max
-,  _previous_value_0(0) // 0-127
-,  _previous_value_1(0) // 0-127
+,  _current_value(0) // 0-127
+,  _previous_value(0) // 0-127
 {
 }
-
-// TODO: consider implementing this to set initial value based on control position
-// void MidiSlidePot::begin()
-// {
-// 	pinMode(_pin, INPUT_PULLUP);
-// }
 
 // 
 // public methods
@@ -29,14 +23,28 @@ MidiSlidePot::MidiSlidePot(midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<Hardwa
 
 void MidiSlidePot::sendChange()
 {
-
-  float potVal = analogRead(_pin);
-  int midiVal = potVal * _midi_conversion;
+  uint8_t midiVal = _analog_to_midi();
   // Debouncing: compare against two values to avoid fluctuation,
   // presumably due to a position being in between two digital values
-  if (midiVal != _previous_value_0 && midiVal != _previous_value_1) {
-    _midi_out.sendControlChange(_midi_channel, midiVal, 1);
-    _previous_value_1 = _previous_value_0;
-    _previous_value_0 = midiVal;
+  if (midiVal != _current_value && midiVal != _previous_value) {
+    _previous_value = _current_value;
+    _current_value = midiVal;
+    _send_midi_current_value();
   }
+}
+
+//
+// private methods
+//
+
+uint8_t MidiSlidePot::_analog_to_midi()
+{
+  float potVal = analogRead(_pin);
+  return potVal * _midi_conversion;
+}
+
+// wrapper in case of library change
+void MidiSlidePot::_send_midi_current_value()
+{
+  _midi_out.sendControlChange(_midi_channel, _current_value, 1);
 }

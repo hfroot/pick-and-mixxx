@@ -21,8 +21,10 @@ class MidiSlidePot
 		uint8_t  _pin;
 		uint8_t _midi_channel;
 		double _midi_conversion;
-		uint8_t _previous_value_0;
-		uint8_t _previous_value_1;
+		uint8_t _current_value;
+		uint8_t _previous_value;
+		uint8_t _analog_to_midi();
+		void _send_midi_current_value();
 };
 
 #endif
