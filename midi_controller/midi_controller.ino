@@ -29,6 +29,11 @@ MidiButton midiButton4(midiOut, button4, 74);
 MidiButton midiButton5(midiOut, button5, 75);
 MidiButton midiButton6(midiOut, button6, 76);
 
+const int rotaryEncoder1Clk = 51;
+const int rotaryEncoder1Dt = 53;
+int prevClk = LOW;
+int rotaryValue = 0;
+
 void setup() {
   button1.begin();
   button2.begin();
@@ -36,6 +41,10 @@ void setup() {
   button4.begin();
   button5.begin();
   button6.begin();
+
+  pinMode(rotaryEncoder1Clk, INPUT);
+  pinMode(rotaryEncoder1Dt, INPUT);
+  prevClk = digitalRead(rotaryEncoder1Clk);
 
   while (!Serial) { }; // for Leos
 
@@ -60,4 +69,27 @@ void loop() {
   midiButton4.sendChange();
   midiButton5.sendChange();
   midiButton6.sendChange();
+
+  // rotary encoders
+  int clk = digitalRead(rotaryEncoder1Clk);
+  if (prevClk == LOW && clk == HIGH) {
+    int dt = digitalRead(rotaryEncoder1Dt);
+    if (dt == LOW) {
+      // clockwise
+      if (rotaryValue == 127) {
+        rotaryValue = 0;
+      } else {
+        rotaryValue++;
+      }
+    } else {
+      // anti clockwise
+      if (rotaryValue == 0) {
+        rotaryValue = 127;
+      } else {
+        rotaryValue--;
+      }
+    }
+    midiOut.sendControlChange(80, rotaryValue, 1);
+  }
+  prevClk = clk;
 }

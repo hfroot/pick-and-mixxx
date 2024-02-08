@@ -2,6 +2,6 @@
     "configuration": "cpu=atmega2560",
     "board": "arduino:avr:mega",
     "programmer": "avrispmkii",
-    "port": "/dev/ttyACM0",
+    "port": "/dev/ttyACM1",
     "sketch": "midi_controller/midi_controller.ino"
 }
