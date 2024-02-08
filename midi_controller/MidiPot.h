@@ -1,6 +1,6 @@
 /*
 	A tiny library to convert a sliding logarithmic potentiometer
-    into an MDI signal using Arduino.
+    into an MIDI signal using Arduino.
 
     Inspired by the Button library.
 */
