@@ -11,7 +11,6 @@ MidiPot::MidiPot(midi::MidiInterface<MIDI_NAMESPACE::SerialMIDI<HardwareSerial> 
 :  _midi_out(midi_out)
 ,  _pin(pin)
 ,  _midi_channel(midi_channel)
-// TODO: investigate whether analog max on the circuit
 ,  _midi_conversion((double)128/1024) // 128 = midi max; 1024 = analog max
 ,  _current_value(0) // 0-127
 ,  _previous_value(0) // 0-127
