@@ -30,7 +30,8 @@ MidiButton midiButton4(midiOut, button4, 74);
 MidiButton midiButton5(midiOut, button5, 75);
 MidiButton midiButton6(midiOut, button6, 76);
 
-MidiRotaryEncoder midiRotaryEncoder1(midiOut, 51, 53, 80);
+MidiRotaryEncoder midiRotaryEncoder1(midiOut, 46, 48, 80);
+MidiRotaryEncoder midiRotaryEncoder2(midiOut, 47, 49, 81);
 
 void setup() {
   button1.begin();
@@ -41,6 +42,7 @@ void setup() {
   button6.begin();
 
   midiRotaryEncoder1.setup();
+  midiRotaryEncoder2.setup();
 
   while (!Serial) { }; // for Leos
 
@@ -67,4 +69,5 @@ void loop() {
   midiButton6.sendChange();
 
   midiRotaryEncoder1.sendChange();
+  midiRotaryEncoder2.sendChange();
 }

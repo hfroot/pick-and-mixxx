@@ -18,9 +18,10 @@ MidiRotaryEncoder::MidiRotaryEncoder(midi::MidiInterface<MIDI_NAMESPACE::SerialM
 {
 }
 
-// Ideas:
-// - make use of the push button (2x scroll speed maybe?)
-// - figure out how to make the jumps in mixxx when scanning smaller
+// TODO:
+// Make Mixxx script which will allow me to control the sensitivity of the scratch speed
+// and use the button? I'm thinking when pressed and turned, lower sensitivity?
+// https://github.com/mixxxdj/mixxx/wiki/midi%20scripting#scratching-and-jog-wheels
 
 // 
 // public methods
@@ -61,5 +62,5 @@ void MidiRotaryEncoder::sendChange()
 // wrapper in case of library change
 void MidiRotaryEncoder::_send_midi_current_value()
 {
-  _midi_out.sendControlChange(80, _rotary_value, 1);
+  _midi_out.sendControlChange(_midi_channel, _rotary_value, 1);
 }
