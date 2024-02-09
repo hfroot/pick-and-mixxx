@@ -24,6 +24,7 @@ class MidiRotaryEncoder
 		uint8_t _midi_channel;
 		uint8_t _previous_clk_value;
         uint8_t _rotary_value;
+        uint8_t _max_value;
 		void _send_midi_current_value();
 };
 

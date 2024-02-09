@@ -14,8 +14,13 @@ MidiRotaryEncoder::MidiRotaryEncoder(midi::MidiInterface<MIDI_NAMESPACE::SerialM
 ,  _midi_channel(midi_channel)
 ,  _previous_clk_value(LOW)
 ,  _rotary_value(0)
+,  _max_value(127)
 {
 }
+
+// Ideas:
+// - make use of the push button (2x scroll speed maybe?)
+// - figure out how to make the jumps in mixxx when scanning smaller
 
 // 
 // public methods
@@ -35,7 +40,7 @@ void MidiRotaryEncoder::sendChange()
     int dt = digitalRead(_dt_pin);
     if (dt == LOW) {
       // clockwise
-      if (_rotary_value == 127) {
+      if (_rotary_value == _max_value) {
         _rotary_value = 0;
       } else {
         _rotary_value++;
@@ -43,7 +48,7 @@ void MidiRotaryEncoder::sendChange()
     } else {
       // anti clockwise
       if (_rotary_value == 0) {
-        _rotary_value = 127;
+        _rotary_value = _max_value;
       } else {
         _rotary_value--;
       }
