@@ -1,4 +1,6 @@
-# Arduino MIDI
+# Pick and mixxx : the modular DJ controller
+
+<img src="https://github.com/hfroot/pick-and-mixxx/assets/9282816/5db87034-f49b-4608-8bf5-42d640616db9" alt="A prototype attached to a cooling tray. There are 3 sliding potentiometers, 6 buttons, 4 large and 2 small rotating potentiometers. These are arranged in an order that is vaguely recognisable as a DJ controller. I am adjusting the wiring to the connected Arduino Mega." width="600"/>
 
 Goals (in order of feasibility/priority):
 - an arduino midi deck that can be mapped to mixxx software
@@ -12,8 +14,8 @@ Goals (in order of feasibility/priority):
 
 - Linux Fedora
 - Arduino software
-- Arduino MKR 1010 (chosen for no particular reason other than that was the one I had lying around)
-- Mixxx (chosen because I was already using this particular software)
+- Arduino Mega (chosen for it's many analog and digital input pins)
+- Mixxx (chosen because I was already using this particular software, and it's open source)
 
 ## Photos
 
